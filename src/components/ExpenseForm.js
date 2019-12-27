@@ -6,6 +6,7 @@ import * as plannerActions from '../redux/plannerActions';
 import Label from './shared/Label';
 import Input from './shared/Input';
 import Button from './shared/Button';
+import plannerSelectors from '../redux/plannerSelectors';
 
 const labelStyles = `
   margin-bottom: 16px;
@@ -14,11 +15,12 @@ const labelStyles = `
 class ExpenseForm extends Component {
   static propTypes = {
     onSave: T.func.isRequired,
+    balance: T.number.isRequired,
   };
 
   state = {
     name: '',
-    amount: 0,
+    amount: ' ',
   };
 
   handleChange = e => {
@@ -28,15 +30,28 @@ class ExpenseForm extends Component {
   };
 
   handleSubmit = e => {
+    const { name, amount } = this.state;
     e.preventDefault();
-
+    if (!name) {
+      // eslint-disable-next-line no-alert
+      alert('expense name is missing');
+      return;
+    }
+    if (amount <= 0) {
+      // eslint-disable-next-line no-alert
+      alert('expense amount is missing');
+      return;
+    }
     const expense = {
       name: this.state.name,
       amount: Number(this.state.amount),
     };
-
+    if (expense.amount > this.props.balance) {
+      alert('Balance is negative!');
+      return;
+    }
     this.props.onSave(expense);
-    this.setState({ name: '', amount: 0 });
+    this.setState({ name: '', amount: ' ' });
   };
 
   render() {
@@ -68,8 +83,12 @@ class ExpenseForm extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return { balance: plannerSelectors.calculateBalance(state) };
+};
+
 const mapDispatchToProps = dispatch => ({
   onSave: expense => dispatch(plannerActions.expenseAdd(expense)),
 });
 
-export default connect(null, mapDispatchToProps)(ExpenseForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);

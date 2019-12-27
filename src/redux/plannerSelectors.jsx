@@ -7,6 +7,7 @@ const calculateAllExpenses = state => {
 };
 
 const calculateBalance = state => {
+
   return state.budget - calculateAllExpenses(state);
 };
 
@@ -14,5 +15,5 @@ export default {
   getBudget,
   getExpenses,
   calculateAllExpenses,
-  calculateBalance
+  calculateBalance,
 };

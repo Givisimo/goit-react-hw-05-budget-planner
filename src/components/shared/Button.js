@@ -34,10 +34,11 @@ const Button = ({ type = 'button', label = '', onClick = () => null }) => (
 
 Button.defaultProps = {
   onClick: null,
+  type: 'button',
 };
 
 Button.propTypes = {
-  type: T.string.isRequired,
+  type: T.string,
   label: T.string.isRequired,
   onClick: T.func,
 };

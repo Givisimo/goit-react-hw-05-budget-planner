@@ -17,7 +17,7 @@ class BudgetForm extends Component {
   };
 
   state = {
-    budget: 0,
+    budget: ' ',
   };
 
   handleChange = e => {
@@ -27,10 +27,15 @@ class BudgetForm extends Component {
   };
 
   handleSubmit = e => {
+    const { budget } = this.state;
     e.preventDefault();
-
+    if (budget <= 0) {
+      // eslint-disable-next-line no-alert
+      alert('wrong value, try again');
+      return;
+    }
     this.props.onSave(Number(this.state.budget));
-    this.setState({ budget: 0 });
+    this.setState({ budget: ' ' });
   };
 
   render() {
