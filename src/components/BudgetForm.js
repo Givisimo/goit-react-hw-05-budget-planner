@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import T from 'prop-types';
 import * as plannerActions from '../redux/plannerActions';
 import Form from './shared/Form';
 import Label from './shared/Label';
@@ -11,6 +12,10 @@ const labelStyles = `
 `;
 
 class BudgetForm extends Component {
+  static propTypes = {
+    onSave: T.func.isRequired,
+  };
+
   state = {
     budget: 0,
   };
@@ -24,20 +29,17 @@ class BudgetForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    this.props.onSave(this.state.budget);
+    this.props.onSave(Number(this.state.budget));
     this.setState({ budget: 0 });
   };
 
   render() {
+    const { budget } = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
         <Label customStyles={labelStyles}>
           Enter your total budget
-          <Input
-            type="number"
-            value={this.state.budget}
-            onChange={this.handleChange}
-          />
+          <Input type="number" value={budget} onChange={this.handleChange} />
         </Label>
 
         <Button label="Save" type="submit" />
@@ -49,7 +51,4 @@ const mapDispatchToProps = dispatch => ({
   onSave: budget => dispatch(plannerActions.budgetAdd(budget)),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(BudgetForm);
+export default connect(null, mapDispatchToProps)(BudgetForm);

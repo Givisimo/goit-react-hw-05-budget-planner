@@ -1,7 +1,8 @@
 import React from 'react';
+import T from 'prop-types';
 import styled from 'styled-components';
-import Button from './shared/Button';
 import { connect } from 'react-redux';
+import Button from './shared/Button';
 import plannerSelectors from '../redux/plannerSelectors';
 import * as plannerActions from '../redux/plannerActions';
 
@@ -44,6 +45,17 @@ const ExpensesTable = ({ items = [], onRemove }) => (
   </Table>
 );
 
+ExpensesTable.propTypes = {
+  items: T.arrayOf(
+    T.shape({
+      id: T.string.isRequired,
+      name: T.string.isRequired,
+      amount: T.number.isRequired,
+    }),
+  ).isRequired,
+  onRemove: T.func.isRequired,
+};
+
 const mapStateToProps = state => {
   return { items: plannerSelectors.getExpenses(state) };
 };
@@ -52,7 +64,4 @@ const mapDispatchToProps = dispatch => ({
   onRemove: id => dispatch(plannerActions.expenseRemove(id)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ExpensesTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);

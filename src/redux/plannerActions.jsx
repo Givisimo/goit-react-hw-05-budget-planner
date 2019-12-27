@@ -1,11 +1,11 @@
 import shortid from 'shortid';
 import * as types from './plannerTypes';
 
-export const budgetAdd = sum => {
+export const budgetAdd = value => {
   return {
     type: types.ADD_BUDGET,
     payload: {
-      value: sum,
+      value,
     },
   };
 };

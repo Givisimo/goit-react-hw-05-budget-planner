@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Form from './shared/Form';
 import { connect } from 'react-redux';
+import T from 'prop-types';
+import Form from './shared/Form';
 import * as plannerActions from '../redux/plannerActions';
 import Label from './shared/Label';
 import Input from './shared/Input';
@@ -11,6 +12,10 @@ const labelStyles = `
 `;
 
 class ExpenseForm extends Component {
+  static propTypes = {
+    onSave: T.func.isRequired,
+  };
+
   state = {
     name: '',
     amount: 0,
@@ -35,6 +40,7 @@ class ExpenseForm extends Component {
   };
 
   render() {
+    const { name, amount } = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
         <Label customStyles={labelStyles}>
@@ -42,7 +48,7 @@ class ExpenseForm extends Component {
           <Input
             type="text"
             name="name"
-            value={this.state.name}
+            value={name}
             onChange={this.handleChange}
           />
         </Label>
@@ -51,7 +57,7 @@ class ExpenseForm extends Component {
           <Input
             type="number"
             name="amount"
-            value={this.state.amount}
+            value={amount}
             onChange={this.handleChange}
           />
         </Label>
@@ -66,7 +72,4 @@ const mapDispatchToProps = dispatch => ({
   onSave: expense => dispatch(plannerActions.expenseAdd(expense)),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(ExpenseForm);
+export default connect(null, mapDispatchToProps)(ExpenseForm);

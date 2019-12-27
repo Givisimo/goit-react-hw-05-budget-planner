@@ -1,5 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import T from 'prop-types';
+import styled from 'styled-components';
 
 const StyledButton = styled.button`
   display: inline-flex;
@@ -25,10 +26,19 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ type = "button", label = "", onClick = () => null }) => (
+const Button = ({ type = 'button', label = '', onClick = () => null }) => (
   <StyledButton type={type} onClick={onClick}>
     {label}
   </StyledButton>
 );
 
+Button.defaultProps = {
+  onClick: null,
+};
+
+Button.propTypes = {
+  type: T.string.isRequired,
+  label: T.string.isRequired,
+  onClick: T.func,
+};
 export default Button;
