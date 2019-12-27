@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1dc5691430943cc09d4cc500f42b4261",
+    "revision": "ba3924f112637f333499b9a597c62aaf",
     "url": "/goit-react-hw-05-budget-planner/index.html"
   },
   {
-    "revision": "10ad00b7d9de723f6bec",
+    "revision": "6fca83acbce51193175a",
     "url": "/goit-react-hw-05-budget-planner/static/css/main.0f54525f.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/goit-react-hw-05-budget-planner/static/js/2.d48e5cf6.chunk.js"
   },
   {
-    "revision": "10ad00b7d9de723f6bec",
-    "url": "/goit-react-hw-05-budget-planner/static/js/main.60fd7095.chunk.js"
+    "revision": "6fca83acbce51193175a",
+    "url": "/goit-react-hw-05-budget-planner/static/js/main.1b2da8dc.chunk.js"
   },
   {
     "revision": "fa343405502b5dfb228a",
