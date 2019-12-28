@@ -17,7 +17,7 @@ class BudgetForm extends Component {
   };
 
   state = {
-    budget: ' ',
+    budget: '',
   };
 
   handleChange = e => {
@@ -35,7 +35,7 @@ class BudgetForm extends Component {
       return;
     }
     this.props.onSave(Number(this.state.budget));
-    this.setState({ budget: ' ' });
+    this.setState({ budget: '' });
   };
 
   render() {

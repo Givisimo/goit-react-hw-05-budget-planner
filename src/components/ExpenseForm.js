@@ -20,7 +20,7 @@ class ExpenseForm extends Component {
 
   state = {
     name: '',
-    amount: ' ',
+    amount: '',
   };
 
   handleChange = e => {
@@ -51,7 +51,7 @@ class ExpenseForm extends Component {
       return;
     }
     this.props.onSave(expense);
-    this.setState({ name: '', amount: ' ' });
+    this.setState({ name: '', amount: '' });
   };
 
   render() {
